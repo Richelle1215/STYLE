@@ -39,7 +39,7 @@ export default function Layout({ children }: LayoutProps) {
 
             {/* Desktop Navigation Links */}
             <div className="flex gap-1">
-              {[...mainNavItems, ...overflowItems].map((item) => (
+              {mainNavItems.concat(overflowItems).map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
@@ -59,7 +59,9 @@ export default function Layout({ children }: LayoutProps) {
       </header>
 
       {/* Main Content */}
-      <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">{children}</main>
+      <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        {children}
+      </main>
 
       {/* Desktop Footer */}
       <footer className="hidden sm:block border-t border-border bg-background">
