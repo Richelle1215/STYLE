@@ -66,99 +66,13 @@ export default function Index() {
           </div>
         </div>
 
-        {/* Featured Projects */}
+
+        {/* Recents Gallery Preview */}
         <div className="space-y-8 pt-12">
           <div className="space-y-2">
-            <h2 className="text-3xl font-bold text-foreground">Featured Work</h2>
+            <h2 className="text-3xl font-bold text-foreground">Recents</h2>
             <p className="text-lg text-muted-foreground">
-              A selection of recent projects I've worked on
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {[1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="group overflow-hidden rounded-xl border border-border bg-card transition-all hover:shadow-lg"
-              >
-                <div className="aspect-video overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20">
-                  <div className="flex h-full items-center justify-center text-6xl">
-                    🖼️
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-foreground">
-                    Project {i}
-                  </h3>
-                  <p className="mt-2 text-muted-foreground">
-                    An innovative project showcasing modern web technologies
-                  </p>
-                  <Link
-                    to="/portfolio"
-                    className="mt-4 inline-flex items-center gap-2 text-primary font-medium transition-colors hover:text-primary/80"
-                  >
-                    View Project <ArrowRight size={18} />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex justify-center pt-4">
-            <Link
-              to="/portfolio"
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-transform hover:scale-105"
-            >
-              View All Projects <ArrowRight size={20} />
-            </Link>
-          </div>
-        </div>
-
-        {/* Skills Preview */}
-        <div className="space-y-8 pt-12">
-          <div className="space-y-2">
-            <h2 className="text-3xl font-bold text-foreground">Skills</h2>
-            <p className="text-lg text-muted-foreground">
-              Technologies and tools I work with
-            </p>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-3">
-            {["Frontend", "Backend", "Design"].map((category) => (
-              <div
-                key={category}
-                className="rounded-xl border border-border bg-card p-6"
-              >
-                <h3 className="text-lg font-semibold text-foreground">
-                  {category}
-                </h3>
-                <div className="mt-4 space-y-2">
-                  {["Skill 1", "Skill 2", "Skill 3"].map((skill) => (
-                    <div key={skill} className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full bg-primary" />
-                      <span className="text-sm text-muted-foreground">
-                        {skill}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                <Link
-                  to="/skills"
-                  className="mt-4 inline-block text-sm font-medium text-primary hover:underline"
-                >
-                  Learn more →
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Gallery Preview */}
-        <div className="space-y-8 pt-12">
-          <div className="space-y-2">
-            <h2 className="text-3xl font-bold text-foreground">Gallery</h2>
-            <p className="text-lg text-muted-foreground">
-              A collection of my work and memorable moments
+              A glimpse into my recent moments and projects
             </p>
           </div>
 
@@ -169,7 +83,7 @@ export default function Index() {
                 className="group relative aspect-square overflow-hidden rounded-lg bg-gradient-to-br from-primary/20 to-secondary/20 cursor-pointer transition-transform hover:scale-105"
               >
                 <div className="flex h-full items-center justify-center text-4xl transition-transform group-hover:scale-110">
-                  🖼️
+                  📸
                 </div>
                 <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/20" />
               </div>
@@ -179,25 +93,11 @@ export default function Index() {
           <div className="flex justify-center pt-4">
             <button
               onClick={() => setShowGalleryModal(true)}
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-transform hover:scale-105"
+              className="inline-flex items-center gap-2 rounded-lg text-primary font-semibold transition-all hover:gap-3 group"
             >
-              View All <ArrowRight size={20} />
+              View Albums <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
             </button>
           </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="rounded-2xl bg-gradient-to-r from-primary to-secondary px-8 py-12 text-center text-white md:px-12">
-          <h2 className="text-3xl font-bold">Ready to work together?</h2>
-          <p className="mt-2 text-white/90">
-            Let's create something amazing. Get in touch today.
-          </p>
-          <Link
-            to="/contact"
-            className="mt-6 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-primary transition-transform hover:scale-105"
-          >
-            Get in Touch <ArrowRight size={20} />
-          </Link>
         </div>
       </div>
 
