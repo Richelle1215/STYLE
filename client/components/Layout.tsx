@@ -20,9 +20,10 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation Bar */}
-      <nav className="sticky top-0 z-50 border-b border-border bg-white/80 backdrop-blur-md">
+      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between py-4">
+          {/* Desktop Header with Logo */}
+          <div className="hidden sm:flex items-center justify-between border-b border-border py-4">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
@@ -31,8 +32,8 @@ export default function Layout({ children }: LayoutProps) {
               <span className="text-xl font-bold text-foreground">Portfolio</span>
             </Link>
 
-            {/* Navigation Links */}
-            <div className="hidden gap-1 sm:flex">
+            {/* Desktop Navigation Links */}
+            <div className="flex gap-1">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
@@ -48,42 +49,36 @@ export default function Layout({ children }: LayoutProps) {
                 </Link>
               ))}
             </div>
+          </div>
 
-            {/* Mobile Navigation Button */}
-            <details className="group sm:hidden">
-              <summary className="flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 font-medium text-foreground">
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+          {/* Mobile Tab Bar */}
+          <div className="sm:hidden">
+            <div className="flex items-center justify-between border-b border-border py-3">
+              {/* Mobile Logo */}
+              <Link to="/" className="flex items-center gap-2 flex-shrink-0">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+                  <span className="text-sm font-bold text-primary-foreground">P</span>
+                </div>
+                <span className="text-base font-bold text-foreground">My Work</span>
+              </Link>
+            </div>
+            {/* Tab Bar */}
+            <div className="flex overflow-x-auto border-b border-border">
+              {navItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={cn(
+                    "flex-shrink-0 border-b-2 px-3 py-3 text-xs font-medium transition-colors whitespace-nowrap",
+                    location.pathname === item.path
+                      ? "border-primary text-primary"
+                      : "border-transparent text-muted-foreground hover:text-foreground"
+                  )}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-                Menu
-              </summary>
-              <div className="absolute right-0 mt-2 w-48 origin-top-right rounded-lg border border-border bg-white p-2 shadow-lg">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className={cn(
-                      "block rounded-lg px-4 py-2 text-sm font-medium transition-colors",
-                      location.pathname === item.path
-                        ? "bg-primary text-primary-foreground"
-                        : "text-foreground hover:bg-muted"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </details>
+                  {item.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </nav>
