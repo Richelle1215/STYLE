@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { Home, Briefcase, Zap, FileText, ImageIcon, Mail } from "lucide-react";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -9,21 +10,20 @@ export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
 
   const navItems = [
-    { label: "Home", path: "/" },
-    { label: "Portfolio", path: "/portfolio" },
-    { label: "Skills", path: "/skills" },
-    { label: "Resume", path: "/resume" },
-    { label: "Gallery", path: "/gallery" },
-    { label: "Contact", path: "/contact" },
+    { label: "Home", path: "/", icon: Home },
+    { label: "Portfolio", path: "/portfolio", icon: Briefcase },
+    { label: "Skills", path: "/skills", icon: Zap },
+    { label: "Resume", path: "/resume", icon: FileText },
+    { label: "Gallery", path: "/gallery", icon: ImageIcon },
+    { label: "Contact", path: "/contact", icon: Mail },
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Navigation Bar */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md">
+    <div className="min-h-screen bg-background pb-24 sm:pb-0">
+      {/* Desktop Header */}
+      <header className="hidden sm:block sticky top-0 z-40 border-b border-border bg-white/80 backdrop-blur-md">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Desktop Header with Logo */}
-          <div className="hidden sm:flex items-center justify-between border-b border-border py-4">
+          <div className="flex items-center justify-between py-4">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
@@ -50,50 +50,44 @@ export default function Layout({ children }: LayoutProps) {
               ))}
             </div>
           </div>
-
-          {/* Mobile Tab Bar */}
-          <div className="sm:hidden">
-            <div className="flex items-center justify-between border-b border-border py-3">
-              {/* Mobile Logo */}
-              <Link to="/" className="flex items-center gap-2 flex-shrink-0">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                  <span className="text-sm font-bold text-primary-foreground">P</span>
-                </div>
-                <span className="text-base font-bold text-foreground">My Work</span>
-              </Link>
-            </div>
-            {/* Tab Bar */}
-            <div className="flex overflow-x-auto border-b border-border">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={cn(
-                    "flex-shrink-0 border-b-2 px-3 py-3 text-xs font-medium transition-colors whitespace-nowrap",
-                    location.pathname === item.path
-                      ? "border-primary text-primary"
-                      : "border-transparent text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </div>
         </div>
-      </nav>
+      </header>
 
       {/* Main Content */}
       <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">{children}</main>
 
-      {/* Footer */}
-      <footer className="border-t border-border bg-background">
+      {/* Desktop Footer */}
+      <footer className="hidden sm:block border-t border-border bg-background">
         <div className="mx-auto max-w-7xl px-4 py-8 text-center sm:px-6 lg:px-8">
           <p className="text-sm text-muted-foreground">
             © 2024 My Portfolio. All rights reserved.
           </p>
         </div>
       </footer>
+
+      {/* Mobile Bottom Navigation Bar */}
+      <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-border">
+        <div className="flex items-center justify-around">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={cn(
+                  "flex-1 flex flex-col items-center justify-center py-3 px-2 transition-colors",
+                  location.pathname === item.path
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                <Icon size={24} />
+                <span className="text-xs mt-1 font-medium text-center">{item.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
     </div>
   );
 }
