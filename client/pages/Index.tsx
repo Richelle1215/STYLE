@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import Layout from "@/components/Layout";
+import GalleryModal from "@/components/GalleryModal";
+import { useState } from "react";
 
 export default function Index() {
+  const [showGalleryModal, setShowGalleryModal] = useState(false);
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -149,6 +153,39 @@ export default function Index() {
           </div>
         </div>
 
+        {/* Gallery Preview */}
+        <div className="space-y-8 pt-12">
+          <div className="space-y-2">
+            <h2 className="text-3xl font-bold text-foreground">Gallery</h2>
+            <p className="text-lg text-muted-foreground">
+              A collection of my work and memorable moments
+            </p>
+          </div>
+
+          <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
+            {[1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className="group relative aspect-square overflow-hidden rounded-lg bg-gradient-to-br from-primary/20 to-secondary/20 cursor-pointer transition-transform hover:scale-105"
+              >
+                <div className="flex h-full items-center justify-center text-4xl transition-transform group-hover:scale-110">
+                  🖼️
+                </div>
+                <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/20" />
+              </div>
+            ))}
+          </div>
+
+          <div className="flex justify-center pt-4">
+            <button
+              onClick={() => setShowGalleryModal(true)}
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-transform hover:scale-105"
+            >
+              View All <ArrowRight size={20} />
+            </button>
+          </div>
+        </div>
+
         {/* CTA Section */}
         <div className="rounded-2xl bg-gradient-to-r from-primary to-secondary px-8 py-12 text-center text-white md:px-12">
           <h2 className="text-3xl font-bold">Ready to work together?</h2>
@@ -163,6 +200,9 @@ export default function Index() {
           </Link>
         </div>
       </div>
+
+      {/* Gallery Modal */}
+      <GalleryModal isOpen={showGalleryModal} onClose={() => setShowGalleryModal(false)} />
     </Layout>
   );
 }
